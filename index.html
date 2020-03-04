@@ -1,1 +1,58 @@
-Yes
+<script src="jquery.js"></script>
+<script src="moment.js"></script>
+
+<style>
+    .center {
+        margin: auto;
+        left: 0;
+        right: 0;
+        width: fit-content;
+    }
+
+    .topPadding {
+        padding-top: 20px;
+    }
+
+    h1, h2 {
+        color: #eee;
+    }
+
+    body {
+        background-color: black;
+    }
+</style>
+
+<div class="center">
+    <h1 id="hasTimeStopped" class="center topPadding">Time has stopped</h1>
+    <h2 class="center topPadding">The time is <b id="time"></b></h2>
+</div>
+
+
+<script>
+$(document).ready(function() {
+    $("#time").html(moment().format("h:mm:ss a"));
+    getTime();
+});
+
+function getTime()
+{
+    var defaultTime = moment("2:00:00 pm", "h:mm:ss a");
+    var time = moment();
+    var hasTimeStopped = time.hour() >= 14 && time.hour() < 17;
+
+    if(hasTimeStopped)
+    {
+        $("#hasTimeStopped").html("Time has stopped");
+        $("#time").html(defaultTime.format("h:mm:ss a"));
+    }
+    else
+    {
+        $("#hasTimeStopped").html("Time has not stopped");
+        $("#time").html(time.format("h:mm:ss a"));
+    }
+
+    extraTime++;
+
+    setTimeout(getTime, 1000);
+}
+</script>
