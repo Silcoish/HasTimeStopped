@@ -38,7 +38,7 @@ function getTime()
 {
     var defaultTime = moment("2:00:00 pm", "h:mm:ss a");
     var time = moment();
-    var hasTimeStopped = time.hour() >= 14 && time.hour() < 17;
+    var hasTimeStopped = time.hour() >= 14 && time.hour() < 17 && time.day() != 0 && time.day() != 6;
 
     if(hasTimeStopped)
     {
@@ -50,8 +50,6 @@ function getTime()
         $("#hasTimeStopped").html("Time has not stopped");
         $("#time").html(time.format("h:mm:ss a"));
     }
-
-    extraTime++;
 
     setTimeout(getTime, 1000);
 }
